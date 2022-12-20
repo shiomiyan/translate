@@ -4,7 +4,7 @@ DeepL翻訳をかけるCLIツールです。JA→ENのみサポートしてま�
 
 ### 辞書
 
-csvフォーマットの辞書をサポートしてます。
+csvフォーマットの辞書をサポートしてます。`dict`ディレクトリに`glossary.csv`をおいてください。
 
 ```csv
 source1,target1
