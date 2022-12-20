@@ -41,7 +41,10 @@ async fn main() -> Result<()> {
         .json::<CreateGlossary>()
         .await?;
 
-    println!("Glossaries entry count: {:#?}", &create_glossary.entry_count);
+    println!(
+        "Glossaries entry count: {:#?}",
+        &create_glossary.entry_count
+    );
 
     let glossary_id = create_glossary.glossary_id;
 
