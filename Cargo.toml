@@ -1,14 +1,29 @@
 [package]
-name = "translate"
+name = "translate-gui"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[package.metadata.winresource]
+OriginalFilename = "TRANSLATE-GUI.EXE"
+
+
+[build-dependencies]
+winresource = "0.1"
+
 [dependencies]
 chrono = { version = "0.4.23", features = ["serde"] }
+clap = { version = "4.0.29", features = ["derive"] }
+colored = "2.0.0"
 dotenvy = "0.15.6"
-reqwest = { version = "0.11.13", features = ["json"] }
+eframe = { version = "0.20.1", features = ["__screenshot", "serde"] }
+image = "0.24.5"
+reqwest = { version = "0.11.13", features = ["json", "blocking"] }
+rfd = "0.10.0"
 serde = { version = "1.0.151", features = ["derive"] }
 serde_json = "1.0.91"
 tokio = { version = "1.23.0", features = ["full"] }
+tracing-subscriber = "0.3.16"
+
