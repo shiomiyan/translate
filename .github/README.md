@@ -1,10 +1,15 @@
-DeepL翻訳をかけるCLIツールです。JA→ENのみサポートしてます。
+DeepL GUI frontend with egui.
 
-`cargo run -- "翻訳したい文字列"`で使えます。
+Only for JA → EN.
 
-### 辞書
+## Run
 
-csvフォーマットの辞書をサポートしてます。`dict`ディレクトリに`glossary.csv`をおいてください。
+```sh
+echo "DEEPL_API_KEY=<API_KEY_HERE>" > .env
+cargo run
+```
+
+**csv formatted glossary support**
 
 ```csv
 source1,target1
