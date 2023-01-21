@@ -1,4 +1,3 @@
 /target
 .env
-/dict/*
-!/dict/.gitkeep
+*.csv

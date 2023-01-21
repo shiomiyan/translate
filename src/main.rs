@@ -2,14 +2,12 @@
 
 use chrono::{DateTime, Utc};
 use eframe::egui::{self, CollapsingHeader};
-
 use reqwest::{
     header::{HeaderMap, AUTHORIZATION},
     Result,
 };
-use rfd::FileDialog;
 use serde::{Deserialize, Serialize};
-use std::{fs, process::Command};
+use std::{env, fs, process::Command};
 
 fn main() {
     // Log to stdout (if you run with `RUST_LOG=debug`).
@@ -69,10 +67,18 @@ impl MyApp {
     fn new(cc: &eframe::CreationContext<'_>) -> Self {
         setup_custom_fonts(&cc.egui_ctx);
 
+        dotenvy::dotenv().ok();
+        let deepl_api_key = env::var("DEEPL_API_KEY").unwrap();
+        let deepl_api_plan = if deepl_api_key.ends_with(":fx") {
+            DeeplApiPlan::Free
+        } else {
+            DeeplApiPlan::Pro
+        };
+
         Self {
             app_config: AppConfig {
-                deepl_api_key: "<API_KEY>:fx".to_owned(),
-                deepl_api_plan: DeeplApiPlan::Free,
+                deepl_api_key,
+                deepl_api_plan,
             },
             input: "".to_owned(),
             translated: "".to_owned(),
@@ -148,7 +154,7 @@ impl eframe::App for MyApp {
                             .display()
                             .to_string();
                         if ui.button("🖊 edit glossary.csv").clicked() {
-                            let out = Command::new("notepad")
+                            let _ = Command::new("notepad")
                                 .arg(pwd)
                                 .output()
                                 .expect("Couldn't open glossary.csv");
